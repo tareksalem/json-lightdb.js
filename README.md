@@ -50,3 +50,32 @@ jsonDB.createDocument(direction, folderName, data, callback);
 
 4. the fourth param is a callback function returns with the results of creating document with 2 params the first one is the error to check errors and the second is the data if the proccess run successfully.
 
+___
+
+### to read the document
+
+```javascript
+jsonDB.readDocument(dir, file, callback);
+
+```
+
+1. **dir**: is the directory which contains the document
+2. **file**: is the name of directory
+3. **callback**: is a callback function returns with two params the first one is err to check the errors and the second one is the data of the document  if there are no errors.
+
+### to update the document
+**with this function you can update the document with inserting a new index or update and edit a current index**
+```javascript
+jsonDB.updateDocument(dir, file, callback);
+```
+1. **dir**: is the directory which contains the document
+2. **file**: is the name of directory
+3. **callback**: is a function has two params the first one is error to check if there are errors while updating the document and the second one is a data which exist on the file included inside array and to update a specific index you can chose the index or make a loop to indexes and choose the index, and the data will be edited automatically, and also you can insert a new index to the document with push function like this:
+
+```javascript
+jsonDB.updateDocument(dir, file, function (err, data) {
+  data.push({username: "jsondb", "type": "database"});
+});
+
+```
+
