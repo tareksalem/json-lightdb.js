@@ -73,9 +73,36 @@ jsonDB.updateDocument(dir, file, callback);
 3. **callback**: is a function has two params the first one is error to check if there are errors while updating the document and the second one is a data which exist on the file included inside array and to update a specific index you can chose the index or make a loop to indexes and choose the index, and the data will be edited automatically, and also you can insert a new index to the document with push function like this:
 
 ```javascript
+/* to push a new index to document*/
 jsonDB.updateDocument(dir, file, function (err, data) {
   data.push({username: "jsondb", "type": "database"});
 });
-
+/* end */
+/* to update a current index */
+  jsonDB.updateDocument(dir, file, function (err, data) {
+    // to edit the first index of data array
+    data[0].type = "db";
+  })
+/* end */
 ```
+## to find a specific index and execute it from the document:
 
+#### We allow to you a good feature to access on a specific index inside the document with function contains some methods like find indexes with id or find indexes with property of index and also you can specify the limit of indexes which you want to execute and the arrangement of indexes from new to old and visa versa.
+
+```javascript
+jsonDB.findIndex(dir, file, get, callback);
+```
+**dir**: is the direction of container folder of document
+**file**: is the document name
+**get**: is an object contains many properties and the get object contains these methods :
+
+**get.way**: with this method you specify the way of calling the data and you can write one property of the following: 
+  1. ```javascript
+        get.way= "index"
+      ```
+      it means that you want to call a specific index with his number so for example if you want to call the index number four of document so you write :
+      ```javascript
+        get.way = "index";
+        get.index = 3
+      ```
+  2. 
