@@ -105,4 +105,54 @@ jsonDB.findIndex(dir, file, get, callback);
         get.way = "index";
         get.index = 3
       ```
-  2. 
+  2. ```javascript
+        get.way = "prop"
+     ```
+     this method you call it when you want to execute index based on its properties.
+    for example if you want to extract index contains a property called username = "john", so you can write something like this
+    ```javascript
+      get.way = "prop"
+      get.props = {
+        username: "john"
+      }
+    ```
+     and automatically the library will execute all indexes which contain this username, and you can specify multiple properties to search in indexes.
+
+3. if you want to execute all indexes without search you may not need to specify the way method
+  
+4. if you want to execute the indexes from new to old you write the arrange method like this
+    ```javascript
+      get.arrange = "new";
+    ```
+    and the library will execute the data of document from new to old.
+ 5. the data normally executes from old to new
+ 6. if you want to execute a random data so you can define the arrange method to "random" like this:
+    ```javascript
+      get.arrange = "random";
+    ```
+    and the program will execute a random indexes
+    
+ 7. for all above cases you can specify the limit method to extract a given number of data like this
+    ```javascript
+      // execute 6 indexes for example
+      get.limit = 6;
+    ```
+### to delete a whole document
+you can delete a whole document with this function
+
+```javascript
+  jsonDB.deleteDocument(dir, file, callback);
+```
+**dir**: the name if container folder of document
+**file**: the document name whic you wanna delete
+**callback**: is a callback function returns with error if there is error while deleting the document and in this function we use the native code of node.js to delete a file with fs.unlink() function.
+
+### to remove a specific index from the document
+```javascript
+  jsonDB.removeIndex(dir, file, callback);
+```
+**dir**: the name if container folder of document
+**file**: the document name whic you wanna delete
+**callback**: is a callback function returns with two params:
+  error: to check if there is error while removing the index
+  success: this param returns with removed message to make sure that the index removed successfully
