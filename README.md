@@ -167,7 +167,7 @@ you can delete a whole document with this function
 
 
 
-##Example
+## Example
 
 ```javascript
   const jsonDB = require("json-lightdb");
