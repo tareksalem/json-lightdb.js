@@ -149,10 +149,151 @@ you can delete a whole document with this function
 
 ### to remove a specific index from the document
 ```javascript
-  jsonDB.removeIndex(dir, file, callback);
+  jsonDB.removeIndex(dir, file, index, callback);
 ```
-**dir**: the name if container folder of document
-**file**: the document name whic you wanna delete
-**callback**: is a callback function returns with two params:
-  error: to check if there is error while removing the index
+**dir**: the name if container folder of document <br>
+**file**: the document name whic you wanna delete <br>
+**index**:you can specify in this parameters one of the following :
+
+1. you can specify the number of indiex inside the data array for example remove the index number one so you define the index to 0
+
+2. specify a whole objec so the index could be defined as an onject like that {username: "john doe"} and the similar object which exists inside the array only will be deleted.
+
+3. define the id of the index which you want to delete.
+
+**callback**: is a callback function returns with two params: <br>
+  error: to check if there is error while removing the index <br>
   success: this param returns with removed message to make sure that the index removed successfully
+
+
+
+##Example
+
+```javascript
+  const jsonDB = require("json-lightdb");
+  
+  // create a new document called users in the directory called test
+  
+  jsonDB.createDocument("test", "users", function (err, data) {
+    if (err) {
+      console.log(err)
+    }
+    if (data) {
+      // if you didnt passed an array of data to the function the data param returns with an empty array
+      console.log(data)
+    }
+  });
+  
+  // to update a document with inserting a new index
+  jsonDB.updateDocument("test", "users", function (err, data) {
+    // check if there are error while uploading the data
+    if (err) {
+      console.log(err)
+    }
+    if (data) {
+      // returns with array of data indexes
+      
+      // to push a new index to data array
+      var newUser = {
+        username: "john doe",
+        email: "johnDoe@gmail.com",
+        "password": "johnDoe2",
+        country: "USA"
+      }
+      data.push(newUser);
+    }
+  });
+  
+  // to update a current index 
+  jsonDB.updateDocument("test", "users", function (err, data) {
+     // choose the index
+    data[0].username = "tarek salem";
+    // data saved automatically
+  });
+  
+  // to read a document
+  jsonDB.readDocument("test", "users", function (err, data) {
+    // check errors
+    if (err) {
+      console.log(err)
+    }
+    if (data) {
+    
+      console.log(data)
+    
+    // will output an array of data
+    }
+  })
+  
+  // to find a specific indexes 
+  
+  // define an object with methods of execution
+  var get = {
+  
+  // define the way of getting the indexes
+  
+  way: "prop",
+  
+  // define the properties of users to search in
+  
+  props: {
+      username: "john",
+      email: "johnDoe@gmail.com"
+    }
+  
+  // get 10 indexes of users
+  
+  limit: 10
+  }
+  jsonDB.findIndex("test", "users", get, function (err, data) {
+    
+        // check errors
+    if (err) {
+      console.log(err)
+    }
+    if (data) {
+    
+      console.log(data)
+    
+    // will output an array of data
+    }
+
+  })
+  
+  // to remove  the whole document
+  jsonDB.deleteDocument("test", "users", function (err) {
+      // check the error while removing the document
+      if (err) {
+        console.log(err)
+      }
+  });
+  
+  // remove a specific index 
+    // we will delete the user based on its index in the array so we will delete the user number one
+    
+  jsonDB.removeIndex("test", "users", 0, function (err) {
+       // check the error while removing the index
+      if (err) {
+        console.log(err)
+      }
+  });
+  
+  // remove the user based on its id, so for example we have the following user
+  var user = {username:"john",_id:"_zjlx8trim3c",_index:0};
+  jsonDB.removeIndex("test", "users", user._id, function (err) {
+       // check the error while removing the index
+      if (err) {
+        console.log(err)
+      }
+  });  
+  
+    // remove the user based on the whole index, so for example we have the following user
+  var user = {username:"john",_id:"_zjlx8trim3c",_index:0};
+  jsonDB.removeIndex("test", "users", user, function (err) {
+       // check the error while removing the index
+      if (err) {
+        console.log(err)
+      }
+  });  
+
+```
