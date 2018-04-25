@@ -1,5 +1,6 @@
 # <h1 style="text-align:center;color:red">json-lightdb.js</h1>
-this is a light weight database based on json format, for small projects and who want to include a small and local database in his         project to make it more faster
+
+A light weight NoSQL database based on json format for node.js smapll applications developemnt
 
 ## install it with npm from [here](https://www.npmjs.com/package/json-ligjtdb.js)
 
