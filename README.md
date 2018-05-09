@@ -2,7 +2,7 @@
 
 A light weight NoSQL database based on json format for node.js smapll applications developemnt
 
-## install it with npm from [here](https://www.npmjs.com/package/json-ligjtdb.js)
+## install it with npm from [here](https://www.npmjs.com/package/json-lightdb)
 
 ## How it actually works ?
 <p>
